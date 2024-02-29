@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 21:30:42 by midbella          #+#    #+#             */
-/*   Updated: 2024/02/23 17:16:35 by midbella         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:40:21 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int	checker_1(char *map)
 			return (0);
 		vars.i++;
 	}
-	if (vars.x == 0)
+	if (vars.x == 0 || vars.y != 1 || vars.p != 1)
 		return (0);
 	return (checker_2(map));
 }

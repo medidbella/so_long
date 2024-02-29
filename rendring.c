@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 18:24:08 by midbella          #+#    #+#             */
-/*   Updated: 2024/02/24 19:56:23 by midbella         ###   ########.fr       */
+/*   Updated: 2024/02/26 21:18:07 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	loop_hook_sync(t_data *data, int x, int y)
 	int		height;
 	void	*img;
 
-	if (data->lc_frame[7] > '5')
-		data->lc_frame[7] = '1';
+	if (data->lc_frame[9] > '5')
+		data->lc_frame[9] = '1';
 	img = mlx_xpm_file_to_image(data->mlx_ptr, data->lc_frame, &width, &height);
 	mlx_put_image_to_window(data->images, data->win, img, x, y);
 	mlx_destroy_image(data->mlx_ptr, img);
-	data->lc_frame[7]++;
+	data->lc_frame[9]++;
 }
 
 void	img_destroyer(t_data *data, void *img[5], int nb, int ft)
@@ -65,7 +65,7 @@ void	etc_img_put(t_data *data, void *img[5], t_ints vars, int caller)
 				data->win, img[3], vars.x, vars.y);
 			data->p_x = vars.x;
 			data->p_y = vars.y;
-			data->lp_farme = "images/d_3.xpm";
+			data->lp_farme = "textures/d_3.xpm";
 		}
 		else if (data->map[vars.i] == '\n')
 		{
@@ -90,18 +90,18 @@ void	put_etc(t_data *data, int caller)
 	vars.i = 0;
 	vars.p = 0;
 	img[0] = mlx_xpm_file_to_image(data->mlx_ptr,
-			"images/e_1.xpm", &width, &hight);
+			"textures/e_1.xpm", &width, &hight);
 	img[1] = mlx_xpm_file_to_image(data->mlx_ptr,
-			"images/e_2.xpm", &width, &hight);
+			"textures/e_2.xpm", &width, &hight);
 	img[2] = mlx_xpm_file_to_image(data->mlx_ptr,
-			"images/e_4.xpm", &width, &hight);
+			"textures/e_4.xpm", &width, &hight);
 	img[3] = mlx_xpm_file_to_image(data->mlx_ptr,
-			"images/e_3.xpm", &width, &hight);
+			"textures/e_3.xpm", &width, &hight);
 	if (ft_strchr(data->map, 'C') == -1)
 	{
 		mlx_destroy_image(data->mlx_ptr, img[0]);
 		img[0] = mlx_xpm_file_to_image(data->mlx_ptr,
-				"images/portal_1.xpm", &width, &hight);
+				"textures/portal_1.xpm", &width, &hight);
 	}
 	etc_img_put(data, img, vars, caller);
 }
@@ -115,7 +115,7 @@ void	put_space(t_data *data)
 	void	*img_0;
 
 	img_0 = mlx_xpm_file_to_image(data->mlx_ptr,
-			"images/wood_pl.xpm", &width, &hight);
+			"textures/wood_pl.xpm", &width, &hight);
 	x = 60;
 	y = 60;
 	width = 60;

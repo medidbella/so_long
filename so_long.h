@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 18:19:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/02/25 13:55:29 by midbella         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:22:23 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	put_etc(t_data *data, int caller);
 void	put_space(t_data *data);
 int		collectible(t_data	*data);
 void	img_destroyer(t_data *data, void *img[5], int nb, int ft);
-int		ft_print_d(int nb);
 void	finish_game(t_data *data, int state, char c);
+int		when_x_press(t_data	*data);
 
 #endif

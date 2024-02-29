@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 20:01:53 by midbella          #+#    #+#             */
-/*   Updated: 2024/02/25 13:53:48 by midbella         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:26:41 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,21 @@ void	fill_scren(int color, t_data *data)
 	}
 	if (color == 0xff0000)
 		img = mlx_xpm_file_to_image(data->mlx_ptr,
-				"images/game_over.xpm", &vars.p, &vars.i);
+				"textures/game_over.xpm", &vars.p, &vars.i);
 	else
 		img = mlx_xpm_file_to_image(data->mlx_ptr,
-				"images/you_won.xpm", &vars.p, &vars.i);
+				"textures/you_won.xpm", &vars.p, &vars.i);
 	mlx_put_image_to_window(data->mlx_ptr, data->win,
-		img, data->w_x / 2 - (vars.p / 2), vars.i / 2);
+		img, data->w_x / 2 - (vars.p / 2), data->w_y / 2 - (vars.i / 2));
 	vars.x = 100;
 	while (vars.x-- > 0)
 		mlx_do_sync(data->mlx_ptr);
+}
+
+int	when_x_press(t_data *data)
+{
+	finish_game(data, -1, 0);
+	return (0);
 }
 
 void	finish_game(t_data *data, int state, char c)

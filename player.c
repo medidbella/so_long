@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:39:38 by midbella          #+#    #+#             */
-/*   Updated: 2024/02/24 22:29:14 by midbella         ###   ########.fr       */
+/*   Updated: 2024/02/26 21:16:29 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,23 @@ int	key_handler(int key, t_data *data)
 		data->moves++;
 	if (key == UP && barrier_check(data, key))
 	{
-		animation(data, ft_strdup("images/u_4.xpm"), key);
-		data->lp_farme = "images/u_4.xpm";
+		animation(data, ft_strdup("textures/u_4.xpm"), key);
+		data->lp_farme = "textures/u_4.xpm";
 	}
 	else if (key == LEFT && barrier_check(data, key))
 	{
-		animation(data, ft_strdup("images/l_4.xpm"), key);
-		data->lp_farme = "images/l_4.xpm";
+		animation(data, ft_strdup("textures/l_4.xpm"), key);
+		data->lp_farme = "textures/l_4.xpm";
 	}
 	else if (key == RIGHT && barrier_check(data, key))
 	{
-		animation(data, ft_strdup("images/r_4.xpm"), key);
-		data->lp_farme = "images/r_4.xpm";
+		animation(data, ft_strdup("textures/r_4.xpm"), key);
+		data->lp_farme = "textures/r_4.xpm";
 	}
 	else if (key == DOWN && barrier_check(data, key))
 	{
-		animation(data, ft_strdup("images/d_4.xpm"), key);
-		data->lp_farme = "images/d_4.xpm";
+		animation(data, ft_strdup("textures/d_4.xpm"), key);
+		data->lp_farme = "textures/d_4.xpm";
 	}
 	return (0);
 }
@@ -107,7 +107,7 @@ void	initializer(t_data *data, char *str)
 	int			width;
 	int			height;
 
-	nb = str[9] - 48;
+	nb = str[11] - 48;
 	data->images[nb] = NULL;
 	g = 0;
 	img_destroyer(data, data->images, i, 0);
@@ -115,7 +115,7 @@ void	initializer(t_data *data, char *str)
 	{
 		data->images[nb] = mlx_xpm_file_to_image(data->mlx_ptr,
 				str, &width, &height);
-		str[9]--;
+		str[11]--;
 		g++;
 	}
 	i = g;

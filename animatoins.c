@@ -6,7 +6,7 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 21:12:58 by midbella          #+#    #+#             */
-/*   Updated: 2024/02/24 20:05:20 by midbella         ###   ########.fr       */
+/*   Updated: 2024/02/26 21:04:32 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ void	*wich_frame(t_data *data)
 	int			width;
 	int			height;
 
-	str = ft_strdup("images/1_c.xpm");
+	str = ft_strdup("textures/1_c.xpm");
 	if (calls > 5 && calls <= 10)
-		str[7] = '2';
+		str[9] = '2';
 	else if (calls > 10 && calls <= 15)
-		str[7] = '3';
+		str[9] = '3';
 	else if (calls > 15 && calls <= 20)
-		str[7] = '4';
+		str[9] = '4';
 	else if (calls > 25 && calls <= 30)
-		str[7] = '5';
+		str[9] = '5';
 	calls++;
 	if (calls == 30)
 		calls = 0;
