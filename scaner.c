@@ -6,12 +6,11 @@
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:49:05 by midbella          #+#    #+#             */
-/*   Updated: 2024/02/24 21:47:15 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:33:09 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
 int	ft_strlen(char *str)
 {
@@ -77,7 +76,6 @@ char	*scaner(char *file)
 	char	*temp;
 	char	buff[6];
 
-	buff[5] = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (NULL);

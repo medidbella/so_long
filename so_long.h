@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 18:19:23 by midbella          #+#    #+#             */
-/*   Updated: 2024/02/28 12:22:23 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:40:25 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # define UP 126
 # define DOWN 125
@@ -21,7 +21,7 @@
 # define ESC 53
 # include <unistd.h>
 # include <stdlib.h>
-# include <mlx.h>
+# include "mlx.h"
 # include <fcntl.h>
 
 typedef struct s_data
@@ -63,6 +63,7 @@ void	put_space(t_data *data);
 int		collectible(t_data	*data);
 void	img_destroyer(t_data *data, void *img[5], int nb, int ft);
 void	finish_game(t_data *data, int state, char c);
-int		when_x_press(t_data	*data);
-
+int		x_pressed(t_data	*data);
+void	mlx_failed(t_data *data, void *img);
+void	images_checker(t_data	*data, void *img[5]);
 #endif

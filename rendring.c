@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendring.c                                         :+:      :+:    :+:   */
+/*   rendring_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 18:24:08 by midbella          #+#    #+#             */
-/*   Updated: 2024/02/26 21:18:07 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:33:13 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	loop_hook_sync(t_data *data, int x, int y)
 	if (data->lc_frame[9] > '5')
 		data->lc_frame[9] = '1';
 	img = mlx_xpm_file_to_image(data->mlx_ptr, data->lc_frame, &width, &height);
+	mlx_failed(data, img);
 	mlx_put_image_to_window(data->images, data->win, img, x, y);
 	mlx_destroy_image(data->mlx_ptr, img);
 	data->lc_frame[9]++;
@@ -52,6 +53,7 @@ void	img_destroyer(t_data *data, void *img[5], int nb, int ft)
 
 void	etc_img_put(t_data *data, void *img[5], t_ints vars, int caller)
 {
+	images_checker(data, img);
 	while (data->map[vars.i])
 	{
 		if (ft_strchr("EX1", data->map[vars.i]) != -1)
@@ -99,6 +101,7 @@ void	put_etc(t_data *data, int caller)
 			"textures/e_3.xpm", &width, &hight);
 	if (ft_strchr(data->map, 'C') == -1)
 	{
+		mlx_failed(data, img[0]);
 		mlx_destroy_image(data->mlx_ptr, img[0]);
 		img[0] = mlx_xpm_file_to_image(data->mlx_ptr,
 				"textures/portal_1.xpm", &width, &hight);
@@ -116,10 +119,9 @@ void	put_space(t_data *data)
 
 	img_0 = mlx_xpm_file_to_image(data->mlx_ptr,
 			"textures/wood_pl.xpm", &width, &hight);
+	mlx_failed(data, img_0);
 	x = 60;
 	y = 60;
-	width = 60;
-	hight = 60;
 	while (x + 60 <= (data->w_x - 60))
 	{
 		y = 60;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:39:38 by midbella          #+#    #+#             */
-/*   Updated: 2024/02/26 21:16:29 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:33:16 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	animation(t_data *data, char *str, int key)
 		else if (key == UP || key == DOWN)
 			data->p_y += c;
 		nb = WAIT;
-		while (nb-- > 0)
+		while (nb-- >= 0)
 			mlx_do_sync(data->mlx_ptr);
 		mlx_clear_window(data->mlx_ptr, data->win);
 		put_space(data);
@@ -115,6 +115,7 @@ void	initializer(t_data *data, char *str)
 	{
 		data->images[nb] = mlx_xpm_file_to_image(data->mlx_ptr,
 				str, &width, &height);
+		mlx_failed(data, data->images[nb]);
 		str[11]--;
 		g++;
 	}

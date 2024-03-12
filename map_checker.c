@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker.c                                      :+:      :+:    :+:   */
+/*   map_checker_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 21:30:42 by midbella          #+#    #+#             */
-/*   Updated: 2024/02/27 13:40:21 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:33:22 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static int	checker_4(char *map, t_ints vars)
 
 	vars.i = vars.p;
 	filler(&vars, map);
-	vars.y = 0;
 	while (1)
 	{
 		vars.i = vars.x + 1;
@@ -63,27 +62,22 @@ static int	checker_4(char *map, t_ints vars)
 
 static int	checker_3(char *map, t_ints	vars)
 {
-	vars.i = (vars.x + 1) * (vars.y - 1);
-	while (map[vars.i])
-		if (map[vars.i++] != '1')
-			return (free(map), 0);
-	if (vars.i - (vars.x + 1) * (vars.y - 1) != vars.x)
-		return (free(map), 0);
-	vars.i = vars.x + 1;
-	while (vars.i <= (vars.x + 1) * (vars.y - 1))
+	vars.i = 0;
+	vars.y = ft_strlen(map);
+	while (vars.i < vars.y)
 	{
-		if (map[vars.i] != '1')
-			return (free(map), 0);
-		vars.i += (vars.x + 1);
-	}
-	vars.i = vars.x - 1;
-	while (vars.i <= (vars.x + 1) * (vars.y) - 2)
-	{
-		if (map[vars.i] != '1')
-			return (free(map), 0);
-		vars.i += (vars.x + 1);
+		vars.p = 0;
+		while (map[vars.i] != '\n' && vars.i < vars.y)
+		{
+			vars.p++;
+			vars.i++;
+		}
+		if (vars.p != vars.x)
+			return(free(map), 0);
+		vars.i++;
 	}
 	vars.p = ft_strchr(map, 'P');
+	return(free(map), 1);
 	return (checker_4(map, vars));
 }
 
@@ -99,12 +93,17 @@ static int	checker_2(char *map)
 		if (map[vars.i] == '\n')
 			vars.y++;
 		if ((map[vars.i] != '1' && vars.y == 1)
-			|| (map[vars.i] == '\n' && map[vars.i + 1] != '1'))
+			|| (map[vars.i] == '\n' && map[vars.i + 1] != '1')
+			|| (map[vars.i] == '\n' && map[vars.i - 1] != '1'))
 			return (free(map), 0);
 		else if (vars.y == 1)
 			vars.x++;
 		vars.i++;
 	}
+	vars.i = (vars.x + 1) * (vars.y - 1);
+	while (map[vars.i])
+		if (map[vars.i++] != '1')
+			return (free(map), 0);
 	if (vars.x != vars.y)
 		return (checker_3(map, vars));
 	return (free(map), 0);
@@ -121,7 +120,7 @@ int	checker_1(char *map)
 	while (map[vars.i])
 	{
 		if (vars.p > 1 || vars.y > 1)
-			return (0);
+			return (free(map), 0);
 		if (map[vars.i] == 'C')
 			vars.x++;
 		else if (map[vars.i] == 'P')
@@ -130,10 +129,10 @@ int	checker_1(char *map)
 			vars.y++;
 		else if (map[vars.i] != '0' && map[vars.i] != '1'
 			&& map[vars.i] != '\n' && map[vars.i] != 'X')
-			return (0);
+			return (free(map), 0);
 		vars.i++;
 	}
 	if (vars.x == 0 || vars.y != 1 || vars.p != 1)
-		return (0);
+		return (free(map), 0);
 	return (checker_2(map));
 }

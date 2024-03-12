@@ -1,14 +1,16 @@
 GAME = so_long
-FILES = map_checker.c rendring.c so_long.c etc.c player.c scaner.c animatoins.c finish_game.c
-mlx = -lmlx -framework OpenGL -framework AppKit 
-C_flags = -Wall -Wextra -Werror
+FILES = map_checker.c rendring.c so_long.c etc.c player.c scaner.c finish_game.c animatoins.c
+OBJ_FILES = $(FILES:.c=.o)
+frameworks = -framework OpenGL -framework AppKit libmlx.a
+C_flags =  -Wall -Wextra -Werror
 
-all: $(GAME)
+$(GAME): $(OBJ_FILES)
+	cc $(C_flags) $(frameworks) $(OBJ_FILES) -o $(GAME)
 
-$(GAME): $(FILES)
-	cc $(C_flags) $(mlx) $(FILES) -o $(GAME)
+all: $(B_GAME) $(GAME)
+
 clean:
-	rm -f $(GAME)
+	rm -f $(OBJ_FILES)
 fclean: clean
-
-re: clean all
+	rm -f $(GAME)
+re: fclean $(GAME)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midbella <midbella@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:04:33 by midbella          #+#    #+#             */
-/*   Updated: 2024/02/28 15:43:20 by midbella         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:32:53 by midbella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,12 @@ static void	starter(char *map, t_data *data)
 	data->w_y = data->p_y * 60;
 	data->p_x = 0;
 	data->win = mlx_new_window(data->mlx_ptr, data->w_x, data->w_y, "so_long");
+	if (!data->win)
+		mlx_failed(data, NULL);
 	put_space(data);
 	put_etc(data, 0);
 	mlx_key_hook(data->win, key_handler, data);
-	//mlx_hook(data->mlx_ptr, 18, 0, when_x_press, data);
+	mlx_hook(data->win, 17, 0, x_pressed, data);
 	mlx_loop_hook(data->mlx_ptr, collectible, data);
 	mlx_loop(data->mlx_ptr);
 }
@@ -60,16 +62,21 @@ int	main(int ac, char **av)
 	t_data	data;
 	char	*map;
 
-	if (ac != 2)
-		return (write(2, "Error\nonly one argument is allowed\n", 36), 1);
+	if (ac > 2)
+		return (write(2, "Error\nonly one argument is allowed\n", 35), 1);
+	else if (ac < 2)
+		return (write(2, "Error\ninsert the map name\n", 26), 1);
 	if (!format_check(av[1]))
-		return (write(2, "Error\nplease inter a map in format *.ber\n", 42), 1);
+		return (write(2, "Error\nplease inter a map in format *.ber\n", 41), 1);
 	map = scaner(av[1]);
 	if (!map)
-		return (write(2, "Error\nfile not found\n", 21), 1);
+		return (write(2, "Error\nfile not found or empty\n", 30), 1);
 	if (!checker_1(map))
 		return (write(2, "Error\ninvalid map\n", 18), 1);
 	data.mlx_ptr = mlx_init();
+	data.win = NULL;
+	if (!data.mlx_ptr)
+		mlx_failed(&data, NULL);
 	data.p_y = 1;
 	data.p_x = 0;
 	data.w_x = 0;
